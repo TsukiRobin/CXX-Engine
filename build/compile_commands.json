@@ -1,0 +1,146 @@
+[
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1.dir\\src\\main.cpp.obj -c C:\\PROJECTS\\Project1\\src\\main.cpp",
+  "file": "C:/PROJECTS/Project1/src/main.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1.dir/src/main.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1.dir\\src\\image.cpp.obj -c C:\\PROJECTS\\Project1\\src\\image.cpp",
+  "file": "C:/PROJECTS/Project1/src/image.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1.dir/src/image.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1.dir\\src\\arena.cpp.obj -c C:\\PROJECTS\\Project1\\src\\arena.cpp",
+  "file": "C:/PROJECTS/Project1/src/arena.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1.dir/src/arena.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1.dir\\src_external\\imgui\\imgui.cpp.obj -c C:\\PROJECTS\\Project1\\src_external\\imgui\\imgui.cpp",
+  "file": "C:/PROJECTS/Project1/src_external/imgui/imgui.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1.dir/src_external/imgui/imgui.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1.dir\\src_external\\imgui\\imgui_draw.cpp.obj -c C:\\PROJECTS\\Project1\\src_external\\imgui\\imgui_draw.cpp",
+  "file": "C:/PROJECTS/Project1/src_external/imgui/imgui_draw.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1.dir/src_external/imgui/imgui_draw.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1.dir\\src_external\\imgui\\imgui_tables.cpp.obj -c C:\\PROJECTS\\Project1\\src_external\\imgui\\imgui_tables.cpp",
+  "file": "C:/PROJECTS/Project1/src_external/imgui/imgui_tables.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1.dir/src_external/imgui/imgui_tables.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1.dir\\src_external\\imgui\\imgui_widgets.cpp.obj -c C:\\PROJECTS\\Project1\\src_external\\imgui\\imgui_widgets.cpp",
+  "file": "C:/PROJECTS/Project1/src_external/imgui/imgui_widgets.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1.dir/src_external/imgui/imgui_widgets.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1.dir\\src_external\\imgui\\imgui_impl_sdlrenderer3.cpp.obj -c C:\\PROJECTS\\Project1\\src_external\\imgui\\imgui_impl_sdlrenderer3.cpp",
+  "file": "C:/PROJECTS/Project1/src_external/imgui/imgui_impl_sdlrenderer3.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1.dir/src_external/imgui/imgui_impl_sdlrenderer3.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1.dir\\src_external\\imgui\\imgui_impl_sdl3.cpp.obj -c C:\\PROJECTS\\Project1\\src_external\\imgui\\imgui_impl_sdl3.cpp",
+  "file": "C:/PROJECTS/Project1/src_external/imgui/imgui_impl_sdl3.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1.dir/src_external/imgui/imgui_impl_sdl3.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src\\arena.cpp.obj -c C:\\PROJECTS\\Project1\\src\\arena.cpp",
+  "file": "C:/PROJECTS/Project1/src/arena.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src/arena.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src\\command.cpp.obj -c C:\\PROJECTS\\Project1\\src\\command.cpp",
+  "file": "C:/PROJECTS/Project1/src/command.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src/command.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src\\dev_gui.cpp.obj -c C:\\PROJECTS\\Project1\\src\\dev_gui.cpp",
+  "file": "C:/PROJECTS/Project1/src/dev_gui.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src/dev_gui.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src\\entity.cpp.obj -c C:\\PROJECTS\\Project1\\src\\entity.cpp",
+  "file": "C:/PROJECTS/Project1/src/entity.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src/entity.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src\\game.cpp.obj -c C:\\PROJECTS\\Project1\\src\\game.cpp",
+  "file": "C:/PROJECTS/Project1/src/game.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src/game.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src\\image.cpp.obj -c C:\\PROJECTS\\Project1\\src\\image.cpp",
+  "file": "C:/PROJECTS/Project1/src/image.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src/image.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src\\levelRenderer.cpp.obj -c C:\\PROJECTS\\Project1\\src\\levelRenderer.cpp",
+  "file": "C:/PROJECTS/Project1/src/levelRenderer.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src/levelRenderer.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src\\levels.cpp.obj -c C:\\PROJECTS\\Project1\\src\\levels.cpp",
+  "file": "C:/PROJECTS/Project1/src/levels.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src/levels.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src\\rendering.cpp.obj -c C:\\PROJECTS\\Project1\\src\\rendering.cpp",
+  "file": "C:/PROJECTS/Project1/src/rendering.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src/rendering.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src_external\\imgui\\imgui.cpp.obj -c C:\\PROJECTS\\Project1\\src_external\\imgui\\imgui.cpp",
+  "file": "C:/PROJECTS/Project1/src_external/imgui/imgui.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src_external/imgui/imgui.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src_external\\imgui\\imgui_draw.cpp.obj -c C:\\PROJECTS\\Project1\\src_external\\imgui\\imgui_draw.cpp",
+  "file": "C:/PROJECTS/Project1/src_external/imgui/imgui_draw.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src_external/imgui/imgui_draw.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src_external\\imgui\\imgui_tables.cpp.obj -c C:\\PROJECTS\\Project1\\src_external\\imgui\\imgui_tables.cpp",
+  "file": "C:/PROJECTS/Project1/src_external/imgui/imgui_tables.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src_external/imgui/imgui_tables.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src_external\\imgui\\imgui_widgets.cpp.obj -c C:\\PROJECTS\\Project1\\src_external\\imgui\\imgui_widgets.cpp",
+  "file": "C:/PROJECTS/Project1/src_external/imgui/imgui_widgets.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src_external/imgui/imgui_widgets.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src_external\\imgui\\imgui_impl_sdlrenderer3.cpp.obj -c C:\\PROJECTS\\Project1\\src_external\\imgui\\imgui_impl_sdlrenderer3.cpp",
+  "file": "C:/PROJECTS/Project1/src_external/imgui/imgui_impl_sdlrenderer3.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src_external/imgui/imgui_impl_sdlrenderer3.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/Project1/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -IC:/PROJECTS/Project1/include -IC:/PROJECTS/Project1/src_external -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src_external\\imgui\\imgui_impl_sdl3.cpp.obj -c C:\\PROJECTS\\Project1\\src_external\\imgui\\imgui_impl_sdl3.cpp",
+  "file": "C:/PROJECTS/Project1/src_external/imgui/imgui_impl_sdl3.cpp",
+  "output": "C:/PROJECTS/Project1/build/CMakeFiles/Project1_game.dir/src_external/imgui/imgui_impl_sdl3.cpp.obj"
+}
+]
