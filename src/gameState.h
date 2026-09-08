@@ -4,6 +4,8 @@
 #include "imgui/imgui_internal.h"
 #include "levels.h"
 #include "entity.h"
+#include "input.h"
+
 
 struct GameData {
   uint32_t command_timestamp;
@@ -14,10 +16,14 @@ struct GameData {
   Image* ground;
   Image* player;
   Image* box;
+  Input input;
   Memory::Arena* arena_levels;
   Memory::Arena* arena_images;
   Memory::Arena* arena_entities;
   Memory::Arena* arena_commands;
+  Memory::Arena* arena_input;
+  
+
   CommandBuffer* commandBuffer;
   LevelData* levels;
   int currentLevelIndex;

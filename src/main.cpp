@@ -191,6 +191,21 @@ int main(){
 	Memory::Initialize(arena_main, game_memory, GAME_MEMORY_ALLOWANCE);
 	GameData* gameData = ALLOC(arena_main, GameData);
 	size_t IMAGE_ARENA_SIZE = sizeof(Image) * 1024;
+	size_t INPUT_ARENA_SIZE = 0;
+	INPUT_ARENA_SIZE += sizeof(bool) * SDL_SCANCODE_COUNT * 2;
+	INPUT_ARENA_SIZE += sizeof(float) * SDL_SCANCODE_COUNT;
+	INPUT_ARENA_SIZE += 128;
+	gameData->arena_input = Memory::CreateSubArena(arena_main, INPUT_ARENA_SIZE);
+
+	gameData->input.keys_current = (bool*)Memory::Allocate(gameData->arena_input,
+	                                                       sizeof(bool) * SDL_SCANCODE_COUNT);
+	gameData->input.keys_previous = (bool*)Memory::Allocate(gameData->arena_input,
+	                                                        sizeof(bool) * SDL_SCANCODE_COUNT);
+	gameData->input.keys_held_time = (float*)Memory::Allocate(gameData->arena_input,
+	                                                          sizeof(float) * SDL_SCANCODE_COUNT);
+
+	
+
 // >Skapa en subarena för images och initiera dom.
 	gameData->arena_images = Memory::CreateSubArena(arena_main, IMAGE_ARENA_SIZE);
 // Skapa en subarena för våra levels, entities och initiera dom.
@@ -276,10 +291,11 @@ int main(){
 		    } 
 
 
-// ut det på skärmen med (draw)
-		dll.update(gameData, dt);
 
-		memcpy((void*)gameData->keys_previous, SDL_GetKeyboardState(nullptr), SDL_SCANCODE_COUNT * sizeof(bool));
+		gameData->input.keys_current = SDL_GetKeyboardState(nullptr);
+		dll.update(gameData, dt);
+		UpdateKeys(&gameData->input, dt);
+		// memcpy((void*)gameData->keys_previous, SDL_GetKeyboardState(nullptr), SDL_SCANCODE_COUNT * sizeof(bool));
 		dll.draw(gameData, renderer);
 
 

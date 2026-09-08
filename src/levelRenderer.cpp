@@ -19,10 +19,10 @@ void RenderLevel(GameData* gameData, SDL_Renderer* renderer){
 
       Image* sprite;
       switch(cellType){
-        case 1:
+        case 3:
           sprite = gameData->ground;
           break;
-        case 3:
+        case 5:
           sprite = gameData->wall;
           break;          
         default:        

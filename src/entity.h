@@ -12,10 +12,10 @@ enum Behaviour : uint32_t {
 
 enum class ID : uint8_t {
   NONE = 0,
-  GROUND = 1,
-  PLAYER = 2,
-  WALL = 3,
-  BOX = 4
+  GROUND = 3,
+  PLAYER = 4,
+  WALL = 2,
+  BOX = 1
 };
 
 struct Position{

@@ -1,7 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"C:/PROJECTS/Project1/build/cmake_install.cmake"
+		"C:/PROJECTS/CXX Engine/build/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

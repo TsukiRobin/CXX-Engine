@@ -18,6 +18,6 @@ const int UPSCALE_FACTOR = 2;
 const int CELL_SIZE_PX = 32 * UPSCALE_FACTOR;
 
 const float MOVE_SPEED = 6.0;
-
+const float UNDO_REPEAT_TIME = 0.15;
 
 

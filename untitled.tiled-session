@@ -1,0 +1,56 @@
+{
+    "activeFile": "",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "assets/base.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1
+        },
+        "assets/levels/testLevel.tmj": {
+            "scale": 1.4378645833333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 479.87829173760286,
+                "y": 320.26659905096534
+            }
+        },
+        "assets/levels/testLevel_box.tmj": {
+            "scale": 1.4378645833333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 479.87829173760286,
+                "y": 320.26659905096534
+            }
+        },
+        "assets/tilemaps/maps/testLevel.tmj": {
+            "scale": 1.4378645833333332,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 479.87829173760286,
+                "y": 320.26659905096534
+            }
+        },
+        "assets/tilemaps/maps/testLevel2.tmj": {
+            "scale": 1.4378645833333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 479.87829173760286,
+                "y": 434.3246278117869
+            }
+        },
+        "assets/tilemaps/maps/testLevel_box.tmj": {
+            "scale": 1.4378645833333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 479.87829173760286,
+                "y": 320.26659905096534
+            }
+        }
+    },
+    "openFiles": [
+    ],
+    "project": "untitled.tiled-project",
+    "recentFiles": [
+    ]
+}
