@@ -3,14 +3,14 @@
 #include "levelRenderer.h"
 #include "common.h"
 #include "rendering.h"
-#include "entity.h"
+// #include "camera.h"
+
 
 void RenderLevel(GameData* gameData, SDL_Renderer* renderer){
 
-  LevelData lvl = gameData->levels[gameData->currentLevel];
+  
 
-  int board_width_px_half = lvl.w * CELL_SIZE_PX / 2;
-  int board_height_px_half = lvl.h * CELL_SIZE_PX / 2;
+  LevelData lvl = gameData->levels[gameData->currentLevel];
 
 
   for (int x = 0; x < lvl.w; x++){
@@ -30,16 +30,8 @@ void RenderLevel(GameData* gameData, SDL_Renderer* renderer){
           break;
       }
 
-      float xPos = x * CELL_SIZE_PX;
-      float yPos = y * CELL_SIZE_PX;
 
-      xPos += SCREEN_WIDTH / 2.0;
-      yPos += SCREEN_HEIGHT / 2.0;
-
-      xPos -= board_width_px_half;
-      yPos -= board_height_px_half;
-
-      RenderSprite(sprite, renderer, xPos, yPos);
+      RenderSprite_Grid(sprite, &lvl, renderer, &gameData->camera, x, y);
     }
   }
 }
@@ -65,23 +57,9 @@ void RenderEntities(GameData* data, SDL_Renderer* renderer){
       break;
     }
 
-    int xPos = 0;
-    int yPos = 0;
-
-    xPos += SCREEN_WIDTH / 2.0;
-    yPos += SCREEN_HEIGHT / 2.0;
-
-    xPos -= data->levels[data->currentLevel].w * CELL_SIZE_PX / 2;
-    yPos -= data->levels[data->currentLevel].h * CELL_SIZE_PX / 2;
 
     float x_animated = std::lerp(entity.x_prev, entity.x, entity.progress_01);
     float y_animated = std::lerp(entity.y_prev, entity.y, entity.progress_01);
-
-    
-
-    xPos += x_animated * CELL_SIZE_PX;
-    yPos += y_animated * CELL_SIZE_PX;
-
-    RenderSprite(img, renderer, xPos, yPos);    
+    RenderSprite_Grid(img, &lvlData,  renderer, &data->camera, x_animated, y_animated);    
   }
 }
