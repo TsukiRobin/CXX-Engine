@@ -5,7 +5,7 @@
 #include "levels.h"
 #include "entity.h"
 #include "input.h"
-
+#include "camera.h"
 
 struct GameData {
   uint32_t command_timestamp;
@@ -17,6 +17,7 @@ struct GameData {
   Image* player;
   Image* box;
   Input input;
+  Camera camera;
   Memory::Arena* arena_levels;
   Memory::Arena* arena_images;
   Memory::Arena* arena_entities;

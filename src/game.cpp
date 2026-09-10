@@ -2,7 +2,6 @@
 #include <windows.h>
 #include <winnt.h>
 #include "game.h"
-#include "SDL3/SDL_events.h"
 #include "SDL3/SDL_scancode.h"
 #include "entity.h"
 #include "imgui/imgui.h"
@@ -10,9 +9,6 @@
 #include "levels.h"
 #include "dev_gui.h"
 #include "common.h"
-#include "input.h"
-
-
 
 extern "C"{
 void Initialize(GameData* data,SDL_Window* window, SDL_Renderer* renderer) {
@@ -39,7 +35,7 @@ void Initialize(GameData* data,SDL_Window* window, SDL_Renderer* renderer) {
   }
 }
 
-bool TryMove(Entity *mover, LevelData *level, CommandBuffer* cmd_buffer, int xDir, int yDir, int timestamp) {
+bool TryMove(Entity* mover, LevelData* level, CommandBuffer* cmd_buffer, int xDir, int yDir, int timestamp) {
   if(mover->HasBehaviour(CAN_MOVE) == false){
     return false;
    }
@@ -78,8 +74,6 @@ bool TryMove(Entity *mover, LevelData *level, CommandBuffer* cmd_buffer, int xDi
    return false;
 }
 
-
-
 bool HandleEvents(GameData *data, SDL_Event event){
   DEV::ProcessEvents(&event);
 
@@ -89,10 +83,7 @@ bool HandleEvents(GameData *data, SDL_Event event){
 
   if (event.key.key == SDLK_ESCAPE){
    return false;
-   }
-  if (event.type == SDL_EVENT_QUIT){
-   return false;
-  }
+ }
 
  return true;
 }
@@ -101,40 +92,41 @@ void Update(GameData* data, float dt){
 
   const bool* keys = SDL_GetKeyboardState(nullptr);
 
-  if (KeyPressed(&data->input, SDL_SCANCODE_Z)||
-      KeyHeld_ForTime(&data->input,SDL_SCANCODE_Z, UNDO_REPEAT_TIME))
-   {
-      if (KeyHeld(&data->input,SDL_SCANCODE_LSHIFT)) {
+  if (KeyPressed(&data->input, SDL_SCANCODE_Z) || KeyHeld_ForTime(&data->input, SDL_SCANCODE_Z, UNDO_REPEAT_TIME)) {
+      ResetKeyHeldTime(&data->input, SDL_SCANCODE_Z);
+      if (KeyHeld(&data->input, SDL_SCANCODE_LSHIFT)) {
           Redo(data->commandBuffer);
       }
       else {
           Undo(data->commandBuffer);
       }
-
   }
-      if(KeyPressed(&data->input, SDL_SCANCODE_RIGHT)||
-    KeyHeld_ForTime(&data->input, SDL_SCANCODE_RIGHT, (1 / MOVE_SPEED) * 1.15))
-      {
-        data->input_buffer[data->input_buffer_write_count++ % data->input_buffer_capacity]
-        = {1, 0};
-      }
-      else if(KeyPressed(&data->input,SDL_SCANCODE_LEFT)||
-              KeyHeld_ForTime(&data->input, SDL_SCANCODE_LEFT, (1 / MOVE_SPEED) * 1.15))
-      {
-        data->input_buffer[data->input_buffer_write_count++ % data->input_buffer_capacity]
-        = {-1, 0};
-      }
-      else if(KeyPressed(&data->input, SDL_SCANCODE_UP)||
-              KeyHeld_ForTime(&data->input, SDL_SCANCODE_UP, (1 / MOVE_SPEED) * 1.15))
-      {
-        data->input_buffer[data->input_buffer_write_count++ % data->input_buffer_capacity]
-        = {0, -1};
-      }
-      else if(KeyPressed(&data->input, SDL_SCANCODE_DOWN)||
-              KeyHeld_ForTime(&data->input, SDL_SCANCODE_DOWN, (1 / MOVE_SPEED) * 1.15) ){
-        data->input_buffer[data->input_buffer_write_count++ % data->input_buffer_capacity]
-        = {0, 1};
-      }
+
+  
+  if (KeyPressed(&data->input, SDL_SCANCODE_RIGHT) ||
+      KeyHeld_ForTime(&data->input, SDL_SCANCODE_RIGHT, (1 / MOVE_SPEED) * 1.15)) {
+      ResetKeyHeldTime(&data->input, SDL_SCANCODE_RIGHT);
+      data->input_buffer[data->input_buffer_write_count++ % data->input_buffer_capacity] =
+          { 1, 0 };
+  }
+  else if (KeyPressed(&data->input, SDL_SCANCODE_LEFT) ||
+      KeyHeld_ForTime(&data->input, SDL_SCANCODE_LEFT, (1 / MOVE_SPEED) * 1.15)) {
+      ResetKeyHeldTime(&data->input, SDL_SCANCODE_LEFT);
+      data->input_buffer[data->input_buffer_write_count++ % data->input_buffer_capacity] =
+          { -1, 0 };
+  }
+  else if (KeyPressed(&data->input, SDL_SCANCODE_UP) ||
+      KeyHeld_ForTime(&data->input, SDL_SCANCODE_UP, (1 / MOVE_SPEED) * 1.15)) {
+      ResetKeyHeldTime(&data->input, SDL_SCANCODE_UP);
+      data->input_buffer[data->input_buffer_write_count++ % data->input_buffer_capacity] =
+          { 0, -1 };
+  }
+  else if (KeyPressed(&data->input, SDL_SCANCODE_DOWN) ||
+       KeyHeld_ForTime(&data->input, SDL_SCANCODE_DOWN, (1 / MOVE_SPEED) * 1.15)) {
+      ResetKeyHeldTime(&data->input, SDL_SCANCODE_DOWN);
+      data->input_buffer[data->input_buffer_write_count++ % data->input_buffer_capacity] =
+          { 0, 1 };
+  }
 
 
       bool are_entities_moving = false;

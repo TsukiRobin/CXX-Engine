@@ -2,7 +2,6 @@
 #include <cstring>
 #include "input.h"
 #include "SDL3/SDL_scancode.h"
-#include "game.h"
 
 bool KeyPressed(const Input* input, SDL_Scancode key){
   if (input->keys_previous == nullptr){
