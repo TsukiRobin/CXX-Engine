@@ -67,6 +67,12 @@
 },
 {
   "directory": "C:/PROJECTS/CXX Engine/build",
+  "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -I\"C:/PROJECTS/CXX Engine/include\" -I\"C:/PROJECTS/CXX Engine/src_external\" -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src\\camera.cpp.obj -c \"C:\\PROJECTS\\CXX Engine\\src\\camera.cpp\"",
+  "file": "C:/PROJECTS/CXX Engine/src/camera.cpp",
+  "output": "C:/PROJECTS/CXX Engine/build/CMakeFiles/Project1_game.dir/src/camera.cpp.obj"
+},
+{
+  "directory": "C:/PROJECTS/CXX Engine/build",
   "command": "\"C:\\Program Files\\LLVM\\bin\\clang++.exe\" -DProject1_game_EXPORTS -I\"C:/PROJECTS/CXX Engine/include\" -I\"C:/PROJECTS/CXX Engine/src_external\" -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview -o CMakeFiles\\Project1_game.dir\\src\\command.cpp.obj -c \"C:\\PROJECTS\\CXX Engine\\src\\command.cpp\"",
   "file": "C:/PROJECTS/CXX Engine/src/command.cpp",
   "output": "C:/PROJECTS/CXX Engine/build/CMakeFiles/Project1_game.dir/src/command.cpp.obj"

@@ -202,6 +202,18 @@ build CMakeFiles/Project1_game.dir/src/arena.cpp.obj: CXX_COMPILER__Project1_gam
   TARGET_PDB = Project1_game.pdb
   TARGET_SUPPORT_DIR = CMakeFiles\Project1_game.dir
 
+build CMakeFiles/Project1_game.dir/src/camera.cpp.obj: CXX_COMPILER__Project1_game_unscanned_Debug C$:/PROJECTS/CXX$ Engine/src/camera.cpp || cmake_object_order_depends_target_Project1_game
+  CONFIG = Debug
+  DEFINES = -DProject1_game_EXPORTS
+  DEP_FILE = CMakeFiles\Project1_game.dir\src\camera.cpp.obj.d
+  FLAGS = -O0 -std=gnu++20 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview
+  INCLUDES = -I"C:/PROJECTS/CXX Engine/include" -I"C:/PROJECTS/CXX Engine/src_external"
+  OBJECT_DIR = CMakeFiles\Project1_game.dir
+  OBJECT_FILE_DIR = CMakeFiles\Project1_game.dir\src
+  TARGET_COMPILE_PDB = CMakeFiles\Project1_game.dir\
+  TARGET_PDB = Project1_game.pdb
+  TARGET_SUPPORT_DIR = CMakeFiles\Project1_game.dir
+
 build CMakeFiles/Project1_game.dir/src/command.cpp.obj: CXX_COMPILER__Project1_game_unscanned_Debug C$:/PROJECTS/CXX$ Engine/src/command.cpp || cmake_object_order_depends_target_Project1_game
   CONFIG = Debug
   DEFINES = -DProject1_game_EXPORTS
@@ -390,7 +402,7 @@ build CMakeFiles/Project1_game.dir/src_external/imgui/imgui_impl_sdl3.cpp.obj: C
 #############################################
 # Link the shared library Project1_game.dll
 
-build Project1_game.dll Project1_game.lib: CXX_SHARED_LIBRARY_LINKER__Project1_game_Debug CMakeFiles/Project1_game.dir/src/arena.cpp.obj CMakeFiles/Project1_game.dir/src/command.cpp.obj CMakeFiles/Project1_game.dir/src/dev_gui.cpp.obj CMakeFiles/Project1_game.dir/src/entity.cpp.obj CMakeFiles/Project1_game.dir/src/game.cpp.obj CMakeFiles/Project1_game.dir/src/image.cpp.obj CMakeFiles/Project1_game.dir/src/input.cpp.obj CMakeFiles/Project1_game.dir/src/levelRenderer.cpp.obj CMakeFiles/Project1_game.dir/src/levels.cpp.obj CMakeFiles/Project1_game.dir/src/rendering.cpp.obj CMakeFiles/Project1_game.dir/src_external/imgui/imgui.cpp.obj CMakeFiles/Project1_game.dir/src_external/imgui/imgui_draw.cpp.obj CMakeFiles/Project1_game.dir/src_external/imgui/imgui_tables.cpp.obj CMakeFiles/Project1_game.dir/src_external/imgui/imgui_widgets.cpp.obj CMakeFiles/Project1_game.dir/src_external/imgui/imgui_impl_sdlrenderer3.cpp.obj CMakeFiles/Project1_game.dir/src_external/imgui/imgui_impl_sdl3.cpp.obj | C$:/PROJECTS/CXX$ Engine/lib/SDL3.lib C$:/PROJECTS/CXX$ Engine/lib/SDL3_image.lib
+build Project1_game.dll Project1_game.lib: CXX_SHARED_LIBRARY_LINKER__Project1_game_Debug CMakeFiles/Project1_game.dir/src/arena.cpp.obj CMakeFiles/Project1_game.dir/src/camera.cpp.obj CMakeFiles/Project1_game.dir/src/command.cpp.obj CMakeFiles/Project1_game.dir/src/dev_gui.cpp.obj CMakeFiles/Project1_game.dir/src/entity.cpp.obj CMakeFiles/Project1_game.dir/src/game.cpp.obj CMakeFiles/Project1_game.dir/src/image.cpp.obj CMakeFiles/Project1_game.dir/src/input.cpp.obj CMakeFiles/Project1_game.dir/src/levelRenderer.cpp.obj CMakeFiles/Project1_game.dir/src/levels.cpp.obj CMakeFiles/Project1_game.dir/src/rendering.cpp.obj CMakeFiles/Project1_game.dir/src_external/imgui/imgui.cpp.obj CMakeFiles/Project1_game.dir/src_external/imgui/imgui_draw.cpp.obj CMakeFiles/Project1_game.dir/src_external/imgui/imgui_tables.cpp.obj CMakeFiles/Project1_game.dir/src_external/imgui/imgui_widgets.cpp.obj CMakeFiles/Project1_game.dir/src_external/imgui/imgui_impl_sdlrenderer3.cpp.obj CMakeFiles/Project1_game.dir/src_external/imgui/imgui_impl_sdl3.cpp.obj | C$:/PROJECTS/CXX$ Engine/lib/SDL3.lib C$:/PROJECTS/CXX$ Engine/lib/SDL3_image.lib
   CONFIG = Debug
   LANGUAGE_COMPILE_FLAGS = -O0 -D_DEBUG -D_DLL -D_MT -Xclang --dependent-lib=msvcrtd -g -Xclang -gcodeview
   LINK_FLAGS = -shared -fuse-ld=lld
