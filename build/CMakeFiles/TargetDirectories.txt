@@ -1,4 +1,0 @@
-C:/PROJECTS/CXX Engine/build/CMakeFiles/Project1.dir
-C:/PROJECTS/CXX Engine/build/CMakeFiles/Project1_game.dir
-C:/PROJECTS/CXX Engine/build/CMakeFiles/edit_cache.dir
-C:/PROJECTS/CXX Engine/build/CMakeFiles/rebuild_cache.dir

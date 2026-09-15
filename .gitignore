@@ -1,2 +1,5 @@
 .build/
 .vs/
+build\
+build/.ninja_deps
+/build
