@@ -1,0 +1,178 @@
+$ConfigPath = "C:\PROJECTS\projects.json"
+function Get-Config {
+    param(
+        [string]$projectName
+    )
+    $config = Get-Content $ConfigPath | ConvertFrom-Json
+    return $config.$projectName
+}
+
+function dev {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$project
+    )
+    
+    $config = Get-Config $project
+    if ($null -eq $config) { return }
+    
+    Set-Location -Path "$($config.path)\src"
+    $env:GAMEPROJECT = $project
+    hx $config.main_file
+}
+
+function build {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$project,
+        [switch]$clean,
+        [string]$preset_name = "default"
+    )
+    goto $project
+
+    $config = Get-Config $project
+    $sourceDir = $config.path
+    
+    if ((Test-Path $sourceDir) -eq $false){
+        Write-Host "root directory not found. Aborting..."
+        return
+    }
+    
+    $buildDir = "$sourceDir/build"
+    if ((Test-Path $buildDir) -eq $false){
+        Write-Host "no build directory found. Aborting..."
+        return
+    }
+    
+
+    if ($clean){
+        Write-Host "Cleaning build directory"
+        Remove-Item -Recurse -Force $buildDir
+    }
+                          
+    cmake --preset $preset_name
+    cmake --build --preset $preset_name
+}
+
+function goto {
+    param(
+        [string]$project
+    )
+    
+    $config = Get-Config $project
+    if ($null -eq $config) { return }
+    
+    Set-Location -Path $config.path
+}
+
+function Create-Project {
+    param(
+        [string]$name,
+        [string]$projectFolder = "C:\PROJECTS",
+        [string]$configpath = "C:\PROJECTS\projects.json"
+    )
+    
+    Set-Location -Path $projectFolder
+    New-Item -Name $name -ItemType "Directory"
+    
+    Copy-Item -Path "C:\PROJECTS\ProjectTemplate\*" -Destination "$projectFolder\$name" -Recurse
+    Write-Host "Copied files"
+    
+    if (Test-Path $configpath) {
+        $jsonObject = Get-Content -Path $configpath -Raw | ConvertFrom-Json
+        $newProjectPath = "$projectFolder\$name" -replace '\\', '/'
+        
+        $newProjectData = [PSCustomObject]@{
+            path = $newProjectPath
+            main_file = "main.cpp"
+        }
+        
+        $jsonObject | Add-Member -MemberType NoteProperty -Name $name -Value $newProjectData
+        $jsonObject | ConvertTo-Json -Depth 10 | Set-Content -Path $configpath
+        
+        Write-Host "Successfully added $name to JSON config."
+    } else {
+        Write-Warning "Could not find the JSON file at: $configpath"
+    }
+}
+
+function practice {
+    Set-Location -Path "C:\PROJECTS\practice\src"
+    New-Item example.cpp -Force
+    subl example.cpp
+}
+function practice_run {
+    cl example.cpp -std=c++23 -o example.exe
+    if ($?) {
+        ./example.exe
+    }
+}
+
+function Get-Projects {
+    param(
+        [string]$project_path = "C:\PROJECTS"
+    )
+
+    if (-not (Test-Path $project_path)) {
+        Write-Warning "The path '$project_path' does not exist."
+        return
+    }
+
+    $directories = Get-ChildItem -Directory -Path $project_path
+
+    if ($directories.Count -eq 0) {
+        Write-Host "No projects found in $project_path" -ForegroundColor Yellow
+        return
+    }
+
+    for ($i = 0; $i -lt $directories.Count; $i++) {
+        # Display as 1-based index to the user ($i + 1)
+        Write-Host "[$($i + 1)]: $($directories[$i].Name)"
+    }
+
+    Write-Host "Select a project by entering its index"
+    [int]$selection = Read-Host "Selection"
+
+    if ($selection -gt 0 -and $selection -le $directories.Count) {
+        # Subtract 1 to get back to the 0-based array index
+        $targetPath = $directories[$selection - 1].FullName
+        Write-Host "Navigating to: $targetPath" -ForegroundColor Green
+        Set-Location -Path $targetPath
+    } else {
+        Write-Warning "Invalid selection. Please run the command again."
+    }
+}
+function Reload-Project {
+    param([Parameter(Mandatory=$true)][string]$project)
+
+
+    $config = Get-Config $project
+    $sourceDir = $config.path
+    if (-not (Test-Path $config.path)) {
+        Write-Warning "The path '$project_path' does not exist."
+        return
+    }
+
+    $buildDir ="$sourceDir/build"
+
+    $cachePath = "$buildDir/CmakeCache.txt"
+    $projectLine = Get-Content $cachePath | Select-String "CMAKE_PROJECT_NAME:STATIC"
+    $projectName = $projectLine.Line.Split("=")[1]
+
+    cmake --build $buildDir --target "${projectName}_game"
+}
+
+
+function Run-Project {
+    param([Parameter(Mandatory=$true)][string]$project)
+    $config = Get-Config $project
+    $SourceDir = $config.path 
+    $BuildDir = "$SourceDir/build";
+    $exePath = "$BuildDir/*.exe";
+    if(Test-Path $exePath){
+         Start-Process -FilePath $exePath -WorkingDirectory $BuildDir # -Wait
+    }
+    else{
+        Write-Error "Executable not found for $exePath";
+    }
+}
