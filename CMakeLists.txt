@@ -20,7 +20,6 @@ set(EXE_EXCLUSIVE
 
 # Filer som BÅDE .exe och DLL behöver
 set(SHARED_SOURCES
-	${CMAKE_SOURCE_DIR}/src/image.cpp
 	${CMAKE_SOURCE_DIR}/src/arena.cpp
 	${CMAKE_SOURCE_DIR}/src/input.cpp
 )

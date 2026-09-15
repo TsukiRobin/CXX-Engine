@@ -1,8 +1,9 @@
 #include "rendering.h"
 #include "SDL3/SDL_render.h"
 #include "common.h"
+#include "spriteLibrary.h"
 // Hjälp funktion för att rendera våran sprite skalbart.
-void RenderSprite_World(Image* sprite, SDL_Renderer* renderer, const Camera* camera,
+void RenderSprite_World(Sprite* sprite, SDL_Renderer* renderer, const Camera* camera,
                         float x, float y, float scale){
   SDL_FRect rect;
   rect.x = x;
@@ -16,7 +17,7 @@ void RenderSprite_World(Image* sprite, SDL_Renderer* renderer, const Camera* cam
 
 
 
-void RenderSprite_Grid(Image* sprite, LevelData* lvl, SDL_Renderer* renderer, const
+void RenderSprite_Grid(Sprite* sprite, LevelData* lvl, SDL_Renderer* renderer, const
                        Camera* camera, float x, float y, float scale){
   camera::GridToWorld(&x, &y, lvl);
   RenderSprite_World(sprite, renderer, camera, x, y, scale);
