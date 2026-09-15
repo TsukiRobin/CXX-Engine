@@ -1,0 +1,22 @@
+{
+    "Project1":  {
+                     "path":  "C:/PROJECTS/Project1",
+                     "main_file":  "main.cpp"
+                 },
+    "Practice":  {
+                     "path":  "C:/PROJECTS/Practice",
+                     "main_file":  "main.cpp"
+                 },
+    "Project Template":  {
+                             "path":  "C:/PROJECTS/ProjectTemplate",
+                             "main_file":  "main.cpp"
+                         },
+    "TeleportTest":  {
+                         "path":  "C:/PROJECTS/TeleportTest",
+                         "main_file":  "main.cpp"
+                     },
+    "CXX Engine": {
+                    "path": "C:/PROJECTS/CXX Engine",
+                    "main_file": "main.cpp"
+    }
+}
