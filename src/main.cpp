@@ -13,6 +13,7 @@
 #include "common.h"
 #include "arena.h"
 #include "gameState.h"
+#include "spriteLibrary.h"
 
 // SDL  komponent pekare
 SDL_Window* window;
@@ -190,7 +191,12 @@ int main(){
 	Memory::Arena* arena_main = new Memory::Arena();
 	Memory::Initialize(arena_main, game_memory, GAME_MEMORY_ALLOWANCE);
 	GameData* gameData = ALLOC(arena_main, GameData);
-	size_t IMAGE_ARENA_SIZE = sizeof(Image) * 1024;
+	int SPRITE_COUNT = 256;
+	size_t IMAGE_ARENA_SIZE = sizeof(Sprite) * SPRITE_COUNT;
+	gameData->arena_images = Memory::CreateSubArena(arena_main,IMAGE_ARENA_SIZE);
+	gameData->spriteBuffer = ALLOC_ARRAY(gameData->arena_images, Sprite, SPRITE_COUNT);
+
+	
 	size_t INPUT_ARENA_SIZE = 0;
 	INPUT_ARENA_SIZE += sizeof(bool) * SDL_SCANCODE_COUNT * 2;
 	INPUT_ARENA_SIZE += sizeof(float) * SDL_SCANCODE_COUNT;
@@ -229,8 +235,6 @@ int main(){
 	gameData->keys_previous = (bool*)Memory::Allocate(gameData->arena_levels, sizeof(bool) * SDL_SCANCODE_COUNT);
 	
 	SDL_SETUP();
-// Assigna våran fallback.png till gameData fallback 
-	gameData->fallback = AssetManagement::LoadSprite(gameData->arena_images, renderer, "fallback.png");
 	
 	printf("Successfully added game memory\n");
 

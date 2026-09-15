@@ -1,65 +1,42 @@
+
 #include <cmath>
 #include <cstdint>
 #include "levelRenderer.h"
 #include "common.h"
 #include "rendering.h"
-// #include "camera.h"
-
+#include "spriteLibrary.h"
 
 void RenderLevel(GameData* gameData, SDL_Renderer* renderer){
-
-  
-
   LevelData lvl = gameData->levels[gameData->currentLevel];
-
 
   for (int x = 0; x < lvl.w; x++){
     for(int y = 0; y < lvl.h; y++){
       uint8_t cellType = lvl.GetCellID(x, y);
+      Sprite* sprite = GetSpriteFromID((ID)cellType, gameData->spriteBuffer);
 
-      Image* sprite;
-      switch(cellType){
-        case 3:
-          sprite = gameData->ground;
-          break;
-        case 5:
-          sprite = gameData->wall;
-          break;          
-        default:        
-          sprite = gameData->fallback;
-          break;
+      if (sprite != nullptr) {
+        RenderSprite_Grid(sprite, &lvl, renderer, &gameData->camera, x, y);
       }
-
-
-      RenderSprite_Grid(sprite, &lvl, renderer, &gameData->camera, x, y);
     }
   }
 }
 
-
 void RenderEntities(GameData* data, SDL_Renderer* renderer){
   LevelData lvlData = data->levels[data->currentLevel];
+  
   for(int i = 0; i < lvlData.entityCount; i++){
-    Image* img;
     Entity entity = lvlData.entityBuffer[i];
-    switch(entity.id){
-      case ID::PLAYER:
-        img = data->player;
-        break;
 
-
-      case ID::BOX:
-        img = data->box;
-        break;
-      default:
-      
-      img = data->fallback;
-      break;
+    if (entity.id == ID::NONE) {
+        continue;
     }
 
+    Sprite* sprite = GetSpriteFromID(entity.id, data->spriteBuffer);
 
-    float x_animated = std::lerp(entity.x_prev, entity.x, entity.progress_01);
-    float y_animated = std::lerp(entity.y_prev, entity.y, entity.progress_01);
-    RenderSprite_Grid(img, &lvlData,  renderer, &data->camera, x_animated, y_animated);    
-  }
+    if (sprite != nullptr) {
+        float x_animated = std::lerp(entity.x_prev, entity.x, entity.progress_01);
+        float y_animated = std::lerp(entity.y_prev, entity.y, entity.progress_01);
+        RenderSprite_Grid(sprite, &lvlData, renderer, &data->camera, x_animated, y_animated);    
+    }
+  }  
 }

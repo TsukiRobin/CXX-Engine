@@ -14,8 +14,11 @@ enum class ID : uint8_t {
   NONE = 0,
   GROUND = 3,
   PLAYER = 4,
-  WALL = 2,
-  BOX = 1
+  WALL = 5,
+  BOX = 1,
+  MEDUSA = 2,
+  GHOST = 6,
+  GOLEM = 7,
 };
 
 struct Position{

@@ -1,6 +1,6 @@
 #pragma once
 #include "command.h"
-#include "image.h"
+#include "spriteLibrary.h"
 #include "imgui/imgui_internal.h"
 #include "levels.h"
 #include "entity.h"
@@ -11,11 +11,7 @@ struct GameData {
   uint32_t command_timestamp;
   const float* dt;
   ImGuiContext* imGui_context;
-  Image* fallback;
-  Image* wall;
-  Image* ground;
-  Image* player;
-  Image* box;
+  Sprite* spriteBuffer;
   Input input;
   Camera camera;
   Memory::Arena* arena_levels;

@@ -14,17 +14,9 @@ extern "C"{
 void Initialize(GameData* data,SDL_Window* window, SDL_Renderer* renderer) {
   DEV::Initialize(window, renderer);
   data->imGui_context = ImGui::GetCurrentContext();
-  
-  data->ground = AssetManagement::LoadSprite(data->arena_images, renderer, "ground.png");
-  printf("Initialized Ground\n");
-  data->wall = AssetManagement::LoadSprite(data->arena_images, renderer, "wall.png");
-  printf("Initialized Wall\n");
-  data->player = AssetManagement::LoadSprite(data->arena_images, renderer, "player.png");
-  printf("Initialized Player\n");
-  data->fallback = AssetManagement::LoadSprite(data->arena_images, renderer, "fallback.png");
-  printf("Initialized Fallback\n");
-  data->box = AssetManagement::LoadSprite(data->arena_images, renderer, "box.png");
-  printf("Initialized Box\n");
+
+
+  AssetManagement::LoadAllSprites(data->spriteBuffer, renderer);  
   data->currentLevel = 0;
   printf("Creating Level\n");
   CreateLevel(data->arena_levels, &data->levels[0], "assets/levels/testLevel.tmj");
