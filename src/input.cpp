@@ -73,6 +73,7 @@ void UpdateMouse(Input* input, float dt){
 
 
 
+
 bool KeyPressed(const Input* input, SDL_Scancode key){
   if (input->keys_previous == nullptr){
     return input->keys_current[key];

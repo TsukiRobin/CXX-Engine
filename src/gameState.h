@@ -6,6 +6,9 @@
 #include "entity.h"
 #include "input.h"
 #include "camera.h"
+#include "levelEditor.h"
+
+
 
 struct GameData {
   uint32_t command_timestamp;
@@ -26,6 +29,10 @@ struct GameData {
   int currentLevelIndex;
   int levelCount;
   int currentLevel;
+  bool edit_level;
+  Editor editorData;
+
+  
   bool* keys_previous;
   LevelData* GetCurrentLevel(){
     return &levels[currentLevelIndex];
