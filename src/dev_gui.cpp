@@ -72,6 +72,13 @@ void DEV::Draw(GameData* data, SDL_Renderer* renderer){
   Draw_History(data->commandBuffer);
 
   DrawFPS(*data->dt);
+
+
+  if(data->edit_level){
+    EDITOR::DrawObjectPanel(&data->editorData, data->spriteBuffer);
+    EDITOR::DrawPreview(&data->editorData, &data->input, renderer,
+                        data->GetCurrentLevel(), &data->camera, data->spriteBuffer);
+  }
   
   ImGui::End();
   ImGui::Render();

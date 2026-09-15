@@ -14,7 +14,7 @@
 #include "arena.h"
 #include "gameState.h"
 #include "spriteLibrary.h"
-
+#include "input.h"
 // SDL  komponent pekare
 SDL_Window* window;
 SDL_Renderer* renderer;
@@ -209,7 +209,8 @@ int main(){
 	                                                        sizeof(bool) * SDL_SCANCODE_COUNT);
 	gameData->input.keys_held_time = (float*)Memory::Allocate(gameData->arena_input,
 	                                                          sizeof(float) * SDL_SCANCODE_COUNT);
-
+//3 Menas med att vi har 3 mouse inputs just nu.
+	gameData->input.mouse_held_time = ALLOC_ARRAY(gameData->arena_input, float, 3);
 	
 
 // >Skapa en subarena för images och initiera dom.
@@ -297,8 +298,10 @@ int main(){
 
 
 		gameData->input.keys_current = SDL_GetKeyboardState(nullptr);
+		gameData->input.mouse_current = SDL_GetMouseState(&gameData->input.mouse_x, &gameData->input.mouse_y);
 		dll.update(gameData, dt);
 		UpdateKeys(&gameData->input, dt);
+		UpdateMouse(&gameData->input, dt);
 		dll.draw(gameData, renderer);
 
 

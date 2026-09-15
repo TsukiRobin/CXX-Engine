@@ -80,26 +80,50 @@ void CreateEntities(Arena* arena, LevelData* lvl_data){
   auto result = nlohmann::json::parse(stream);
   auto entityData = result["layers"][ENTITIES_INDEX]["data"].get<vector<uint8_t>>();
 
-  for (int i = 0; i < lvl_data->w * lvl_data->h; i++){
-    unsigned char entity_id = entityData[i];
-    if(entity_id != 0){
-      lvl_data->entityCount++;
-    }
-  }
 
-  lvl_data->entityBuffer = ALLOC_ARRAY(arena, Entity, lvl_data->entityCount);
-  int index = 0;
+  lvl_data->entityBuffer = ALLOC_ARRAY(arena, Entity, 256);
+
+
+
   for (int i = 0; i < lvl_data->w * lvl_data->h; i++){
     unsigned char entity_id = entityData[i];
     if (entity_id != 0){
       int x = i % lvl_data->w;
       int y = i / lvl_data->w;
-      lvl_data->entityBuffer[index].id = (ID)entity_id;
-      lvl_data->entityBuffer[index].InitializeBaseBehaviour();
-      lvl_data->entityBuffer[index].x = x;
-      lvl_data->entityBuffer[index].y = y;
-      index += 1;      
+      AddEntity((ID)entity_id, x, y, lvl_data);
     }
   }
 
+}
+
+Entity* GetNextAvailableEntity(LevelData* level){
+    for (int i = 0; i < level->entityCount; i++){
+        if(level->entityBuffer[i].id == ID::NONE){
+            return &level->entityBuffer[i];
+        }
+    }
+    return &level->entityBuffer[level->entityCount++];
+}
+
+void AddEntity(ID entity_id, int x, int y, LevelData* level){
+    Entity* entity = level->GetEntity(x, y);
+
+    if(entity == nullptr){
+        entity = GetNextAvailableEntity(level);
+    }
+    entity->x = x;
+    entity->y = y;
+    entity->x_prev = x;
+    entity->y_prev = y;
+    entity->id = entity_id;
+    entity->InitializeBaseBehaviour();
+}
+
+void RemoveEntity(int x, int y, LevelData* level){
+    Entity* entity = level->GetEntity(x, y);
+    if(entity == nullptr){
+        return;
+    }
+
+    *entity = {};
 }
