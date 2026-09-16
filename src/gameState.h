@@ -1,5 +1,4 @@
 #pragma once
-#include "command.h"
 #include "spriteLibrary.h"
 #include "imgui/imgui_internal.h"
 #include "levels.h"
@@ -20,11 +19,10 @@ struct GameData {
   Memory::Arena* arena_levels;
   Memory::Arena* arena_images;
   Memory::Arena* arena_entities;
-  Memory::Arena* arena_commands;
   Memory::Arena* arena_input;
-  
+  float player_jump_power;
+  float gravity;  
 
-  CommandBuffer* commandBuffer;
   LevelData* levels;
   int currentLevelIndex;
   int levelCount;
@@ -32,7 +30,8 @@ struct GameData {
   bool edit_level;
   Editor editorData;
 
-  
+
+  int score; 
   bool* keys_previous;
   LevelData* GetCurrentLevel(){
     return &levels[currentLevelIndex];

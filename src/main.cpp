@@ -9,7 +9,6 @@
 #include "SDL3/SDL_keycode.h"
 #include "SDL3/SDL_render.h"
 #include "SDL3/SDL_timer.h"
-#include "command.h"
 #include "common.h"
 #include "arena.h"
 #include "gameState.h"
@@ -218,11 +217,6 @@ int main(){
 // Skapa en subarena för våra levels, entities och initiera dom.
 	gameData->arena_levels = Memory::CreateSubArena(arena_main, MEGABYTES(3));
 	gameData->arena_entities = Memory::CreateSubArena(gameData->arena_levels, MEGABYTES(1));
-	gameData->arena_commands = Memory::CreateSubArena(gameData->arena_levels, MEGABYTES(1));
-	gameData->commandBuffer = ALLOC(arena_main, CommandBuffer);
-	gameData->commandBuffer->capacity = 2000;
-	size_t COMMAND_SIZE = sizeof(AnyCommand) * gameData->commandBuffer->capacity;
-	gameData->commandBuffer->allCommands = ALLOC_ARRAY(gameData->arena_commands, AnyCommand, COMMAND_SIZE);
 	
 	gameData->input_buffer_capacity = 10;
 	size_t RING_BUFFER_SIZE = sizeof(Position) * gameData->input_buffer_capacity;

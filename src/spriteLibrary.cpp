@@ -28,14 +28,6 @@ Sprite* GetSpriteFromID(ID id, Sprite* spriteBuffer){
       return &spriteBuffer[(int)SPRITE_ID::Wall];
     case ID::PLAYER:
       return &spriteBuffer[(int)SPRITE_ID::Player];
-    case ID::BOX:
-      return &spriteBuffer[(int)SPRITE_ID::Rock];
-    case ID::MEDUSA:
-      return &spriteBuffer[(int)SPRITE_ID::Medusa];
-    case ID::GHOST:
-      return &spriteBuffer[(int)SPRITE_ID::Ghost];
-    case ID::GOLEM:
-      return &spriteBuffer[(int)SPRITE_ID::Golem];
       break;
 
     default:

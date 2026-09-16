@@ -11,7 +11,7 @@
   <image source="../sprites/ground.png" width="32" height="32"/>
  </tile>
  <tile id="3">
-  <image source="../../../../Users/Robin/Downloads/Sprite-00012.ase" width="32" height="32"/>
+  <image source="../sprites/player.png" width="32" height="32"/>
  </tile>
  <tile id="4">
   <image source="../sprites/wall.png" width="32" height="32"/>

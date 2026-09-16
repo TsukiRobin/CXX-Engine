@@ -34,9 +34,7 @@ void RenderEntities(GameData* data, SDL_Renderer* renderer){
     Sprite* sprite = GetSpriteFromID(entity.id, data->spriteBuffer);
 
     if (sprite != nullptr) {
-        float x_animated = std::lerp(entity.x_prev, entity.x, entity.progress_01);
-        float y_animated = std::lerp(entity.y_prev, entity.y, entity.progress_01);
-        RenderSprite_Grid(sprite, &lvlData, renderer, &data->camera, x_animated, y_animated);    
+        RenderSprite_Grid(sprite, &lvlData, renderer, &data->camera, entity.x, entity.y);    
     }
   }  
 }

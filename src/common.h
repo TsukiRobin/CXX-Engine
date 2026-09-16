@@ -6,7 +6,10 @@
 #define ALLOC(arena, type) (type*)Memory::Allocate((arena), sizeof(type));
 #define ALLOC_ARRAY(arena, type, count) (type*)Memory::Allocate((arena), sizeof(type) * count);
 
-
+const float GRAVITY = 100.0f;
+const float ACCELERATION = 60.0f; 
+const float FRICTION = 0.85f;      
+const float BOUNCE = -0.8f;        
 
 constexpr size_t GAME_MEMORY_ALLOWANCE = MEGABYTES(10);
 constexpr int FPS = 240;

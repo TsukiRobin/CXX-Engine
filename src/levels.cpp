@@ -113,8 +113,8 @@ void AddEntity(ID entity_id, int x, int y, LevelData* level){
     }
     entity->x = x;
     entity->y = y;
-    entity->x_prev = x;
-    entity->y_prev = y;
+    entity->vx = 0.0;
+    entity->vy = 0.0;
     entity->id = entity_id;
     entity->InitializeBaseBehaviour();
 }

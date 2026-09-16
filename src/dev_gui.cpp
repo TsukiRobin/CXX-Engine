@@ -1,6 +1,5 @@
 #include "dev_gui.h"
 #include "gameState.h"
-#include "command.h"
 #include "imgui/imgui_impl_sdl3.h"
 #include "imgui/imgui_impl_sdlrenderer3.h"
 #include "SDL3/SDL_render.h"
@@ -19,18 +18,6 @@ void Draw_Imgui_Arena_Usage(Arena* arena, std::string name_of_arena){
   ImGui::ProgressBar(fraction, ImVec2(-1,0), barText.c_str()); 
 }
 
-void Draw_History(CommandBuffer* buffer){
-  int sliderPos = buffer->index;
-
-  if(ImGui::SliderInt("history", &sliderPos, 0, buffer->head)){
-    while(buffer->index > sliderPos){
-      Undo(buffer);
-    }
-    while(buffer->index < sliderPos){
-      Redo(buffer);
-    }
-  }
-}
 
 void DrawFPS(float dt){
   ImGui::Text("FPS: %0.f", 1 / dt);
@@ -66,10 +53,9 @@ void DEV::Draw(GameData* data, SDL_Renderer* renderer){
 
   Draw_Imgui_Arena_Usage(data->arena_images, "images");
   Draw_Imgui_Arena_Usage(data->arena_levels, "levels");
-  Draw_Imgui_Arena_Usage(data->arena_commands, "commands");
   Draw_Imgui_Arena_Usage(data->arena_entities, "entities");
-  
-  Draw_History(data->commandBuffer);
+  ImGui::SliderFloat("Gravity", &data->gravity, 50.0f, 800.0f);
+  ImGui::SliderFloat("Jump Power", &data->player_jump_power, -20.0f, -200.0f);  
 
   DrawFPS(*data->dt);
 

@@ -15,10 +15,6 @@ enum class ID : uint8_t {
   GROUND = 3,
   PLAYER = 4,
   WALL = 5,
-  BOX = 1,
-  MEDUSA = 2,
-  GHOST = 6,
-  GOLEM = 7,
 };
 
 struct Position{
@@ -28,12 +24,13 @@ struct Position{
 
 struct Entity {
   ID  id;
-  int x;
-  int y;
-  int x_prev;
-  int y_prev;
-  float progress_01;
+  float x;
+  float y;
+  float vx;
+  float vy;
+  bool on_floor = false;
   Behaviour behaviour;
+  int jumps_left;
 
 
   bool HasBehaviour(Behaviour flags){
@@ -59,14 +56,11 @@ struct Entity {
         SetBehaviour(NONE);
         break;
       case ID::PLAYER:
-        SetBehaviour((Behaviour)(CAN_MOVE | IS_PLAYER | RESPOND_TO_INPUT));
-          break;
-
-      case ID::BOX:
-        SetBehaviour((Behaviour)CAN_MOVE);
+        SetBehaviour((Behaviour)(CAN_MOVE | IS_PLAYER | RESPOND_TO_INPUT ));
+        jumps_left = 2;
         break;
+          
+
     }
   }
 };
-
-  bool IsMoving(Entity* e);

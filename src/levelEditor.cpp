@@ -15,16 +15,8 @@ namespace EDITOR{
       editor->object_to_place_id = ID::WALL;
     }
     ImGui::SameLine();
-    if(ImGui::ImageButton("Rock", (ImTextureID)GetSpriteFromID(ID::BOX, spriteBuffer)->texture, size)){
-      editor->object_to_place_id = ID::BOX;
-    }
-    ImGui::SameLine();
     if(ImGui::ImageButton("Player", (ImTextureID)GetSpriteFromID(ID::PLAYER, spriteBuffer)->texture, size)){
       editor->object_to_place_id = ID::PLAYER;
-    }
-    ImGui::SameLine();
-    if(ImGui::ImageButton("Medusa", (ImTextureID)GetSpriteFromID(ID::MEDUSA, spriteBuffer)->texture, size)){
-      editor->object_to_place_id = ID::MEDUSA;
     }
 
     ImGui::End();
