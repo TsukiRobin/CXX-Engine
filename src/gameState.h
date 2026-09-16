@@ -22,7 +22,7 @@ struct GameData {
   Memory::Arena* arena_input;
   float player_jump_power;
   float gravity;  
-
+  float player_dash_power;
   LevelData* levels;
   int currentLevelIndex;
   int levelCount;

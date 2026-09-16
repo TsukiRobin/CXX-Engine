@@ -6,7 +6,8 @@ enum Behaviour : uint32_t {
   NONE = 0, // 1
   CAN_MOVE = 1 << 0, // 2
   IS_PLAYER = 1 << 1, // 4
-  RESPOND_TO_INPUT = 1 << 2 // 8
+  RESPOND_TO_INPUT = 1 << 2,
+  IGNORE_GRAVITY = 1 << 3
 };
 
 
@@ -31,6 +32,7 @@ struct Entity {
   bool on_floor = false;
   Behaviour behaviour;
   int jumps_left;
+  float dash_timer;
 
 
   bool HasBehaviour(Behaviour flags){
