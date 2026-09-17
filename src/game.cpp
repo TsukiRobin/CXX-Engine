@@ -17,23 +17,54 @@ bool IsWall(LevelData* level, float x, float y) {
     return level->GetCellID((int)x, (int)y) == (uint8_t)ID::WALL;
 }
 
+
+
 void Jump(Entity* e, GameData* data) {
-    if(e->jumps_left > 0) {
+    if (e->jumps_left > 0) {
+        LevelData* level = data->GetCurrentLevel();
+        
+        bool wall_left  = IsWall(level, e->x - 0.1f, e->y + 0.5f);
+        bool wall_right = IsWall(level, e->x + 1.1f, e->y + 0.5f);
+
+        // 1. Spara undan om vi stod på marken INNAN vi nollställer det!
+        bool is_grounded = e->on_floor;
+
         e->jumps_left--; 
         e->on_floor = false;
         
-        printf("JUMPING! Jumps left: %d\n", e->jumps_left);
-        e->vy = data->player_jump_power; 
+        // 2. Om vi står på marken -> Gör alltid ett vanligt hopp!
+        if (is_grounded) {
+            e->vy = data->player_jump_power; 
+            printf("Vanligt hopp från marken!\n");
+        } 
+        // 3. Om vi INTE är på marken, men rör en vänster-vägg -> Wall Jump höger
+        else if (wall_left) {
+            e->vy = data->player_jump_power - 10.0; 
+            e->vx = 25.0f; 
+            e->facing_left = false; // Vänd spelaren utåt!
+            printf("Wall jump från vänster vägg!\n");
+        } 
+        // 4. Om vi INTE är på marken, men rör en höger-vägg -> Wall Jump vänster
+        else if (wall_right) {
+            e->vy = data->player_jump_power - 10.0; 
+            e->vx = -25.0f; 
+            e->facing_left = true; // Vänd spelaren utåt!
+            printf("Wall jump från höger vägg!\n");
+        } 
+        // 5. Vanligt dubbelhopp (i luften, rör inga väggar)
+        else {
+            e->vy = data->player_jump_power; 
+            printf("Dubbelhopp i luften!\n");
+        }
     }
 }
-
 void Dash(Entity* e, GameData* d) {
     if(e->jumps_left > 0) {
         e->jumps_left--;
         e->on_floor = false;
         
         e->AddBehaviour(IGNORE_GRAVITY); 
-        e->dash_timer = 0.2f; 
+        e->dash_timer = 0.1f; 
 
         float mouse_x = d->input.mouse_x;
         float mouse_y = d->input.mouse_y;
@@ -68,15 +99,26 @@ void Initialize(GameData* data, SDL_Window* window, SDL_Renderer* renderer) {
     data->currentLevel = 0;
     data->score = 0; 
     
-    data->gravity = 200.0f;
-    data->player_jump_power = -40.0f;
-    data->player_dash_power = 60.0f; 
+    data->gravity = 185.0f;
+    data->player_jump_power = -35.0f;
+    data->player_dash_power = 30.0f; 
+    data->wall_friction = 0.45f;
 
     printf("Creating Level\n");
-    CreateLevel(data->arena_levels, &data->levels[0], "assets/levels/testLevel.tmj");
-    printf("Level Created, Creating entities\n");
-    CreateEntities(data->arena_entities, &data->levels[data->currentLevel]);
-    printf("Entities Created!\n");
+    // CreateLevel(data->arena_levels, &data->levels[0], "assets/levels/testLevel.tmj");
+    // printf("Level Created, Creating entities\n");
+    GenerateRoom(data->arena_levels, &data->levels[0], 18, 12);
+
+    // CreateEntities(data->arena_entities, &data->levels[data->currentLevel]);
+    // printf("Entities Created!\n");
+    //
+    LevelData* level = &data->levels[0];
+    Entity* player = GetNextAvailableEntity(level);    
+    player->id = ID::PLAYER;
+    player->x = 5.0f;
+    player->y = 5.0f;
+    player->InitializeBaseBehaviour();
+    player->jumps_left = 2;    
 }
 
 bool HandleEvents(GameData *data, SDL_Event event){
@@ -102,29 +144,40 @@ void Update(GameData* data, float dt){
     for (int i = 0; i < level->entityCount; i++) {
         Entity* e = &level->entityBuffer[i];
         if (e->id == ID::NONE) continue;
-
         if (e->id == ID::PLAYER) {
-            if (KeyHeld(&data->input, SDL_SCANCODE_RIGHT) || (KeyHeld(&data->input, SDL_SCANCODE_D))) e->vx += ACCELERATION * dt;
-            if (KeyHeld(&data->input, SDL_SCANCODE_LEFT) || (KeyHeld(&data->input, SDL_SCANCODE_A)))  e->vx -= ACCELERATION * dt;
+            if (KeyHeld(&data->input, SDL_SCANCODE_RIGHT) || (KeyHeld(&data->input, SDL_SCANCODE_D))){
+               e->vx += ACCELERATION * dt; 
+               e->facing_left = false;
+            } 
+            if (KeyHeld(&data->input, SDL_SCANCODE_LEFT) || (KeyHeld(&data->input, SDL_SCANCODE_A))){
+                e->vx -= ACCELERATION * dt;
+                e->facing_left = true;
+            }  
             
             if(KeyPressed(&data->input, SDL_SCANCODE_SPACE)) Jump(e, data);      
-            if(MousePressed(&data->input, MouseButtons::RIGHT)) Dash(e, data);
+            if(KeyPressed(&data->input, SDL_SCANCODE_LSHIFT)) Dash(e, data);
         }
 
         e->on_floor = false; 
         bool touching_wall = false; 
 
         if (e->HasBehaviour(CAN_MOVE)) {
-            
-            e->vx *= std::pow(FRICTION, dt * 60.0f); 
+            if(e->dash_timer <= 0){
+                e->vx *= std::pow(FRICTION, dt * 60.0f); 
+            }
 
             e->x += e->vx * dt;
             
             float check_x = e->x + (e->vx > 0 ? 0.8f : 0.2f);
             if (IsWall(level, check_x, e->y + 0.5f)) {
                 e->x -= e->vx * dt; 
-                e->vx = e->vx * BOUNCE; 
+                e->vx = 0; 
                 touching_wall = true; 
+
+                if (e->vy > 0) {
+                    e->vy *= std::pow(data->wall_friction, dt * 60.0f); 
+                    printf("We are touching a wall right now\n");
+                }
             }
 
             e->y += e->vy * dt;
@@ -142,7 +195,9 @@ void Update(GameData* data, float dt){
         if (e->dash_timer > 0) {
             e->dash_timer -= dt;
             if (e->dash_timer <= 0) {
-                e->RemoveBehaviour(IGNORE_GRAVITY); 
+                e->RemoveBehaviour(IGNORE_GRAVITY);
+                e->vx *= 0.1f;
+                e->vy *= 0.1f;
             }
         }
 
@@ -150,7 +205,7 @@ void Update(GameData* data, float dt){
             e->vy += data->gravity * dt;
         }
 
-        if (e->on_floor || touching_wall) {
+        if (e->on_floor) {
             e->jumps_left = 2;
         }
     }

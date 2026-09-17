@@ -1,8 +1,7 @@
 
-#include <cmath>
 #include <cstdint>
 #include "levelRenderer.h"
-#include "common.h"
+#include "SDL3/SDL_surface.h"
 #include "rendering.h"
 #include "spriteLibrary.h"
 
@@ -32,9 +31,10 @@ void RenderEntities(GameData* data, SDL_Renderer* renderer){
     }
 
     Sprite* sprite = GetSpriteFromID(entity.id, data->spriteBuffer);
+    SDL_FlipMode flip = entity.facing_left ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
 
     if (sprite != nullptr) {
-        RenderSprite_Grid(sprite, &lvlData, renderer, &data->camera, entity.x, entity.y);    
+        RenderSprite_Grid(sprite, &lvlData, renderer, &data->camera, entity.x, entity.y - 0.2f, 1.0,1.0,flip);    
     }
   }  
 }

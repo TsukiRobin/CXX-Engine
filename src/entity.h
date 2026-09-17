@@ -33,6 +33,7 @@ struct Entity {
   Behaviour behaviour;
   int jumps_left;
   float dash_timer;
+  bool facing_left;
 
 
   bool HasBehaviour(Behaviour flags){

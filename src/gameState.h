@@ -23,6 +23,7 @@ struct GameData {
   float player_jump_power;
   float gravity;  
   float player_dash_power;
+  float wall_friction;
   LevelData* levels;
   int currentLevelIndex;
   int levelCount;

@@ -56,7 +56,8 @@ void DEV::Draw(GameData* data, SDL_Renderer* renderer){
   Draw_Imgui_Arena_Usage(data->arena_entities, "entities");
   ImGui::SliderFloat("Gravity", &data->gravity, 50.0f, 800.0f);
   ImGui::SliderFloat("Jump Power", &data->player_jump_power, -20.0f, -200.0f);  
-
+  ImGui::SliderFloat("DashPower", &data->player_dash_power,10.0f, 40.0f);
+  ImGui::SliderFloat("Wall Friction", &data->wall_friction,0.001f, 0.8f);
   DrawFPS(*data->dt);
 
 

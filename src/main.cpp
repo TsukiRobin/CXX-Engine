@@ -269,8 +269,6 @@ int main(){
 		
 		SDL_Event event;
 		    while(SDL_PollEvent(&event)){
-		    		printf("Calling handleEvents with event type: %u\n", event.type);
-		    		fflush(stdout);
 		        running = dll.handleEvents(gameData, event);
 		        if (!running){
 								printf("Running set to false, closing\n");

@@ -6,15 +6,42 @@
 #include "Parsers/json.hpp"
 #include "entity.h"
 #include "common.h"
+#include "arena.h"
 using namespace std;
-
-
 
 #include <fstream>
 #include <vector>
 
 const int LEVEL_INDEX = 0;
 const int ENTITIES_INDEX = 1;
+
+void GenerateRoom(Arena* arena, LevelData* level, int w, int h) {
+    level->w = w;
+    level->h = h;
+    float size = w * h * sizeof(uint8_t);
+
+    level->cells = ALLOC_ARRAY(arena, uint8_t,size);
+
+
+    for (int y = 0; y < h; ++y){
+        for (int x = 0; x < w; ++x){
+
+            int index = y * w + x;
+
+            if(x == 0 || x == w - 1 || y == 0 || y == h - 1){
+                level->cells[index] = (uint8_t)ID::WALL;
+            }
+            else{
+                level->cells[index] = (uint8_t)ID::NONE;
+            }
+        }
+    }   
+    level->entityBuffer = ALLOC_ARRAY(arena, Entity, 256);
+    level->entityCount = 0;
+   
+}
+
+
 void CreateLevel(Arena* arena, LevelData* level, const char* level_name) {
     if (!arena || !level || !level_name) {
         printf("arena: %p, level: %p, level_name: %p\n", (void*)arena, (void*)level, (void*)level_name);

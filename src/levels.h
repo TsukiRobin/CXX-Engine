@@ -30,9 +30,10 @@ struct LevelData{
 
   };
 
+void GenerateRoom(Arena* arena, LevelData* level, int w, int h);
 void CreateLevel(Arena* arena, LevelData* level, const char* level_name);
 void CreateEntities(Arena* arena, LevelData* level_data);
-
+Entity* GetNextAvailableEntity(LevelData* level);
 Entity* GetNextAvailableEntitySlot(Entity* entityBuffer);
 void AddEntity(ID entity_id, int x, int y, LevelData* level);
 void RemoveEntity(int x, int y, LevelData* level);
