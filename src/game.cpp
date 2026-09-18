@@ -19,41 +19,41 @@ bool IsWall(LevelData* level, float x, float y) {
 
 
 
-void Jump(Entity* e, GameData* data) {
-    if (e->jumps_left > 0) {
+void Jump(Entity* entity, GameData* data) {
+    if (entity->jumps_left > 0) {
         LevelData* level = data->GetCurrentLevel();
         
-        bool wall_left  = IsWall(level, e->x - 0.1f, e->y + 0.5f);
-        bool wall_right = IsWall(level, e->x + 1.1f, e->y + 0.5f);
+        bool wall_left  = IsWall(level, entity->x - 0.1f, entity->y + 0.5f);
+        bool wall_right = IsWall(level, entity->x + 1.1f, entity->y + 0.5f);
 
         // 1. Spara undan om vi stod på marken INNAN vi nollställer det!
-        bool is_grounded = e->on_floor;
+        bool is_grounded = entity->on_floor;
 
-        e->jumps_left--; 
-        e->on_floor = false;
+        entity->jumps_left--; 
+        entity->on_floor = false;
         
         // 2. Om vi står på marken -> Gör alltid ett vanligt hopp!
         if (is_grounded) {
-            e->vy = data->player_jump_power; 
+            entity->vy = data->player_jump_power; 
             printf("Vanligt hopp från marken!\n");
         } 
         // 3. Om vi INTE är på marken, men rör en vänster-vägg -> Wall Jump höger
         else if (wall_left) {
-            e->vy = data->player_jump_power - 10.0; 
-            e->vx = 25.0f; 
-            e->facing_left = false; // Vänd spelaren utåt!
+            entity->vy = data->player_jump_power - 10.0; 
+            entity->vx = 25.0f; 
+            entity->facing_left = false; // Vänd spelaren utåt!
             printf("Wall jump från vänster vägg!\n");
         } 
         // 4. Om vi INTE är på marken, men rör en höger-vägg -> Wall Jump vänster
         else if (wall_right) {
-            e->vy = data->player_jump_power - 10.0; 
-            e->vx = -25.0f; 
-            e->facing_left = true; // Vänd spelaren utåt!
+            entity->vy = data->player_jump_power - 10.0; 
+            entity->vx = -25.0f; 
+            entity->facing_left = true; // Vänd spelaren utåt!
             printf("Wall jump från höger vägg!\n");
         } 
         // 5. Vanligt dubbelhopp (i luften, rör inga väggar)
         else {
-            e->vy = data->player_jump_power; 
+            entity->vy = data->player_jump_power; 
             printf("Dubbelhopp i luften!\n");
         }
     }
