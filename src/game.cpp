@@ -1,7 +1,6 @@
 
 #include <cstdio>
 #include <cmath> 
-#include <cstdlib>
 #include "game.h"
 #include "SDL3/SDL_scancode.h"
 #include "entity.h"
@@ -26,35 +25,56 @@ void Jump(Entity* entity, GameData* data) {
         bool wall_left  = IsWall(level, entity->x - 0.1f, entity->y + 0.5f);
         bool wall_right = IsWall(level, entity->x + 1.1f, entity->y + 0.5f);
 
+<<<<<<< Updated upstream
         // 1. Spara undan om vi stod på marken INNAN vi nollställer det!
         bool is_grounded = entity->on_floor;
+=======
+        bool is_grounded = e->on_floor;
+>>>>>>> Stashed changes
 
         entity->jumps_left--; 
         entity->on_floor = false;
         
-        // 2. Om vi står på marken -> Gör alltid ett vanligt hopp!
         if (is_grounded) {
+<<<<<<< Updated upstream
             entity->vy = data->player_jump_power; 
             printf("Vanligt hopp från marken!\n");
+=======
+            e->vy = data->player_jump_power; 
+
+>>>>>>> Stashed changes
         } 
-        // 3. Om vi INTE är på marken, men rör en vänster-vägg -> Wall Jump höger
         else if (wall_left) {
+<<<<<<< Updated upstream
             entity->vy = data->player_jump_power - 10.0; 
             entity->vx = 25.0f; 
             entity->facing_left = false; // Vänd spelaren utåt!
             printf("Wall jump från vänster vägg!\n");
+=======
+            e->vy = data->player_jump_power - 10.0; 
+            e->vx = 25.0f; 
+            e->facing_left = false;
+>>>>>>> Stashed changes
         } 
-        // 4. Om vi INTE är på marken, men rör en höger-vägg -> Wall Jump vänster
         else if (wall_right) {
+<<<<<<< Updated upstream
             entity->vy = data->player_jump_power - 10.0; 
             entity->vx = -25.0f; 
             entity->facing_left = true; // Vänd spelaren utåt!
             printf("Wall jump från höger vägg!\n");
+=======
+            e->vy = data->player_jump_power - 10.0; 
+            e->vx = -25.0f; 
+            e->facing_left = true;
+>>>>>>> Stashed changes
         } 
-        // 5. Vanligt dubbelhopp (i luften, rör inga väggar)
         else {
+<<<<<<< Updated upstream
             entity->vy = data->player_jump_power; 
             printf("Dubbelhopp i luften!\n");
+=======
+            e->vy = data->player_jump_power - 10; 
+>>>>>>> Stashed changes
         }
     }
 }
@@ -99,19 +119,14 @@ void Initialize(GameData* data, SDL_Window* window, SDL_Renderer* renderer) {
     data->currentLevel = 0;
     data->score = 0; 
     
-    data->gravity = 185.0f;
-    data->player_jump_power = -35.0f;
-    data->player_dash_power = 30.0f; 
+    data->gravity = 95.0f;
+    data->player_jump_power = -25.0;
+    data->player_dash_power = 50.0f; 
     data->wall_friction = 0.45f;
 
     printf("Creating Level\n");
-    // CreateLevel(data->arena_levels, &data->levels[0], "assets/levels/testLevel.tmj");
-    // printf("Level Created, Creating entities\n");
     GenerateRoom(data->arena_levels, &data->levels[0], 18, 12);
 
-    // CreateEntities(data->arena_entities, &data->levels[data->currentLevel]);
-    // printf("Entities Created!\n");
-    //
     LevelData* level = &data->levels[0];
     Entity* player = GetNextAvailableEntity(level);    
     player->id = ID::PLAYER;
@@ -119,6 +134,8 @@ void Initialize(GameData* data, SDL_Window* window, SDL_Renderer* renderer) {
     player->y = 5.0f;
     player->InitializeBaseBehaviour();
     player->jumps_left = 2;    
+    player->current_frame = 0;
+    player->anim_timer = 0.0f;
 }
 
 bool HandleEvents(GameData *data, SDL_Event event){
@@ -181,6 +198,7 @@ void Update(GameData* data, float dt){
             }
 
             e->y += e->vy * dt;
+
             
             float check_y = e->y + (e->vy > 0 ? 0.8f : 0.2f);
             if (IsWall(level, e->x + 0.5f, check_y)) {
@@ -196,6 +214,7 @@ void Update(GameData* data, float dt){
             e->dash_timer -= dt;
             if (e->dash_timer <= 0) {
                 e->RemoveBehaviour(IGNORE_GRAVITY);
+
                 e->vx *= 0.1f;
                 e->vy *= 0.1f;
             }
@@ -207,6 +226,23 @@ void Update(GameData* data, float dt){
 
         if (e->on_floor) {
             e->jumps_left = 2;
+        }
+
+        // --- ANIMERING ---
+        if (e->id == ID::PLAYER) {
+            bool is_moving = std::abs(e->vx) > 0.5f;
+
+            if (is_moving && e->on_floor) {
+                const float FRAME_TIME = 0.1f; // Sekunder per bildruta (0.1f = 10 FPS)
+                e->anim_timer += dt;
+                if (e->anim_timer >= FRAME_TIME) {
+                    e->anim_timer -= FRAME_TIME;
+                    e->current_frame++;
+                }
+            } else {
+                e->current_frame = 0;
+                e->anim_timer = 0.0f;
+            }
         }
     }
 }

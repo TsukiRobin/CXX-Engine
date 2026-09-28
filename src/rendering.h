@@ -7,7 +7,7 @@
 
 
 void RenderSprite_World(Sprite* sprite, SDL_Renderer* renderer, const Camera* camera,
-                        float x, float y, float scale = 1, float alpha = 1, SDL_FlipMode flip = SDL_FLIP_NONE);
+                        float x, float y, float scale = 1, float alpha = 1, SDL_FlipMode flip = SDL_FLIP_NONE, int frame = 0);
 void RenderSprite_Grid(Sprite* sprite, LevelData* lvl, SDL_Renderer* renderer, const Camera* camera,
-                       float x, float y , float scale = 1, float alpha = 1,SDL_FlipMode flip = SDL_FLIP_NONE);
+                       float x, float y , float scale = 1, float alpha = 1,SDL_FlipMode flip = SDL_FLIP_NONE, int frame= 0);
 

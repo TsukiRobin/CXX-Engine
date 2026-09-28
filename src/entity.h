@@ -35,6 +35,9 @@ struct Entity {
   float dash_timer;
   bool facing_left;
 
+  int current_frame = 0;
+  float anim_timer = 0.0f;
+
 
   bool HasBehaviour(Behaviour flags){
     return (behaviour & flags) == flags;

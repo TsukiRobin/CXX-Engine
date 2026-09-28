@@ -34,7 +34,7 @@ void RenderEntities(GameData* data, SDL_Renderer* renderer){
     SDL_FlipMode flip = entity.facing_left ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
 
     if (sprite != nullptr) {
-        RenderSprite_Grid(sprite, &lvlData, renderer, &data->camera, entity.x, entity.y - 0.2f, 1.0,1.0,flip);    
+        RenderSprite_Grid(sprite, &lvlData, renderer, &data->camera, entity.x, entity.y - 0.2f, 1.0,1.0,flip, entity.current_frame);    
     }
   }  
 }

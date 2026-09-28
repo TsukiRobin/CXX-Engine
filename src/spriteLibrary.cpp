@@ -8,12 +8,12 @@
 const char* FALLBACK_PATH = "assets/sprites/fallback.png";
 
 static const SpriteDataEntry all_sprite_data[] = {
-  {SPRITE_ID::Fallback, FALLBACK_PATH},
-  {SPRITE_ID::Wall, "assets/sprites/wall.png"},
-  {SPRITE_ID::Player, "assets/sprites/player.png"},
-  {SPRITE_ID::Rock, "assets/sprites/box.png"},
-  {SPRITE_ID::Ground, "assets/sprites/ground.png"},
-  {SPRITE_ID::Medusa, "assets/sprites/medusa.png"},
+  {SPRITE_ID::Fallback, FALLBACK_PATH, 1},
+  {SPRITE_ID::Wall, "assets/sprites/wall.png", 1},
+  {SPRITE_ID::Player, "assets/sprites/player.png", 6},
+  {SPRITE_ID::Rock, "assets/sprites/box.png",1},
+  {SPRITE_ID::Ground, "assets/sprites/ground.png",1 },
+  {SPRITE_ID::Medusa, "assets/sprites/medusa.png",1},
 };
 
 
@@ -55,8 +55,9 @@ namespace AssetManagement{
     SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
     Sprite* sprite = &spriteBuffer[(int)entry.id];
     sprite->texture = texture;
+    sprite->frames = entry.frames > 0 ? entry.frames : 1;
     sprite->height = texture->h;
-    sprite->width = texture->w;
+    sprite->width = texture->w / sprite->frames;
 
 
     SDL_DestroySurface(surface);

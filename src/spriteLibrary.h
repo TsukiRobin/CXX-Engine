@@ -8,6 +8,7 @@ struct Sprite{
   SDL_Texture* texture;
   int height;
   int width;
+  int frames = 1;
 };
 
 enum class SPRITE_ID{
@@ -25,6 +26,7 @@ enum class SPRITE_ID{
 struct SpriteDataEntry{
   SPRITE_ID id;
   const char* path;
+  int frames = 1;
   
 };
 Sprite* GetSpriteFromID(ID id, Sprite* spriteBuffer);
