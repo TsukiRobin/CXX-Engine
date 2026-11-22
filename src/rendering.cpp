@@ -12,8 +12,6 @@ void RenderSprite_World(Sprite* sprite, SDL_Renderer* renderer, const Camera* ca
     rect.y = y - camera->camera_y;
     rect.h = sprite->height * UPSCALE_FACTOR * scale;
     rect.w = sprite->width * UPSCALE_FACTOR * scale;
-    rect.x -= camera->camera_x;
-    rect.y -= camera->camera_y;
 
 
     int safe_frame = frame % sprite->frames;

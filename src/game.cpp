@@ -25,56 +25,27 @@ void Jump(Entity* entity, GameData* data) {
         bool wall_left  = IsWall(level, entity->x - 0.1f, entity->y + 0.5f);
         bool wall_right = IsWall(level, entity->x + 1.1f, entity->y + 0.5f);
 
-<<<<<<< Updated upstream
-        // 1. Spara undan om vi stod på marken INNAN vi nollställer det!
+        // Spara undan om vi stod på marken INNAN vi nollställer det!
         bool is_grounded = entity->on_floor;
-=======
-        bool is_grounded = e->on_floor;
->>>>>>> Stashed changes
 
         entity->jumps_left--; 
         entity->on_floor = false;
         
         if (is_grounded) {
-<<<<<<< Updated upstream
             entity->vy = data->player_jump_power; 
-            printf("Vanligt hopp från marken!\n");
-=======
-            e->vy = data->player_jump_power; 
-
->>>>>>> Stashed changes
         } 
         else if (wall_left) {
-<<<<<<< Updated upstream
-            entity->vy = data->player_jump_power - 10.0; 
+            entity->vy = data->player_jump_power - 10.0f; 
             entity->vx = 25.0f; 
             entity->facing_left = false; // Vänd spelaren utåt!
-            printf("Wall jump från vänster vägg!\n");
-=======
-            e->vy = data->player_jump_power - 10.0; 
-            e->vx = 25.0f; 
-            e->facing_left = false;
->>>>>>> Stashed changes
         } 
         else if (wall_right) {
-<<<<<<< Updated upstream
-            entity->vy = data->player_jump_power - 10.0; 
+            entity->vy = data->player_jump_power - 10.0f; 
             entity->vx = -25.0f; 
             entity->facing_left = true; // Vänd spelaren utåt!
-            printf("Wall jump från höger vägg!\n");
-=======
-            e->vy = data->player_jump_power - 10.0; 
-            e->vx = -25.0f; 
-            e->facing_left = true;
->>>>>>> Stashed changes
         } 
         else {
-<<<<<<< Updated upstream
             entity->vy = data->player_jump_power; 
-            printf("Dubbelhopp i luften!\n");
-=======
-            e->vy = data->player_jump_power - 10; 
->>>>>>> Stashed changes
         }
     }
 }
