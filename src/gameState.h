@@ -6,6 +6,7 @@
 #include "input.h"
 #include "camera.h"
 #include "levelEditor.h"
+#include "cannonRoom.h"
 
 
 
@@ -23,6 +24,7 @@ struct GameData {
   float player_jump_power;
   float gravity;  
   float player_dash_power;
+  float player_dash_time; // sekunder som dashen varar
   float wall_friction;
   LevelData* levels;
   int currentLevelIndex;
@@ -30,6 +32,7 @@ struct GameData {
   int currentLevel;
   bool edit_level;
   Editor editorData;
+  CannonRoom cannon_room;
 
 
   int score; 

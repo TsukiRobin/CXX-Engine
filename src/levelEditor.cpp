@@ -11,11 +11,14 @@ namespace EDITOR{
       editor->object_to_place_id = ID::GROUND;
     }
     ImGui::SameLine();
-    if(ImGui::ImageButton("Wall", (ImTextureID)GetSpriteFromID(ID::WALL, spriteBuffer)->texture, size)){
+    // Ark med flera rutor: visa bara första rutan (uv1.x = 1/frames).
+    Sprite* wall = GetSpriteFromID(ID::WALL, spriteBuffer);
+    if(ImGui::ImageButton("Wall", (ImTextureID)wall->texture, size, {0, 0}, {1.0f / wall->frames, 1})){
       editor->object_to_place_id = ID::WALL;
     }
     ImGui::SameLine();
-    if(ImGui::ImageButton("Player", (ImTextureID)GetSpriteFromID(ID::PLAYER, spriteBuffer)->texture, size)){
+    Sprite* player = GetSpriteFromID(ID::PLAYER, spriteBuffer);
+    if(ImGui::ImageButton("Player", (ImTextureID)player->texture, size, {0, 0}, {1.0f / player->frames, 1})){
       editor->object_to_place_id = ID::PLAYER;
     }
 

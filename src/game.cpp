@@ -10,6 +10,7 @@
 #include "levels.h"
 #include "dev_gui.h"
 #include "common.h"
+#include "cannonRoom.h"
 
 bool IsWall(LevelData* level, float x, float y) {
     if (x < 0 || y < 0 || x >= level->w || y >= level->h) return true;
@@ -49,13 +50,65 @@ void Jump(Entity* entity, GameData* data) {
         }
     }
 }
+// Väljer animation utifrån spelarens tillstånd och stegar fram rutorna.
+// Hopparket (player_jump.png, 8 rutor): 0-1 avstamp, 2 sträckt uppåt,
+// 3 toppen, 4-5 fall, 6-7 landning.
+void UpdatePlayerAnimation(Entity* e, bool touching_wall, float dt) {
+    PlayerAnim next;
+    if (e->dash_timer > 0) {
+        next = PlayerAnim::Dash;
+    } else if (touching_wall && !e->on_floor && e->vy > 0) {
+        next = PlayerAnim::WallGlide;
+    } else if (!e->on_floor) {
+        next = PlayerAnim::Jump;
+    } else if (std::abs(e->vx) > 0.5f) {
+        next = PlayerAnim::Run;
+    } else {
+        next = PlayerAnim::Idle;
+    }
+
+    if (next != e->anim) {
+        e->anim = next;
+        e->current_frame = 0;
+        e->anim_timer = 0.0f;
+    }
+
+    switch (e->anim) {
+        case PlayerAnim::Jump:
+            // Rutan styrs av hastigheten i stället för tiden,
+            // så posen alltid matchar var i hoppbågen spelaren är.
+            if      (e->vy < -15.0f) e->current_frame = 2;
+            else if (e->vy <  -3.0f) e->current_frame = 3;
+            else if (e->vy <   8.0f) e->current_frame = 4;
+            else                     e->current_frame = 5;
+            break;
+        case PlayerAnim::Dash:
+            e->current_frame = 2; // sträckt pose
+            break;
+        case PlayerAnim::WallGlide:
+            e->current_frame = 0;
+            break;
+        case PlayerAnim::Run:
+        case PlayerAnim::Idle: {
+            // Sekunder per bildruta
+            const float frame_time = (e->anim == PlayerAnim::Run) ? 0.08f : 0.15f;
+            e->anim_timer += dt;
+            while (e->anim_timer >= frame_time) {
+                e->anim_timer -= frame_time;
+                e->current_frame++; // RenderSprite_World loopar med % frames
+            }
+            break;
+        }
+    }
+}
+
 void Dash(Entity* e, GameData* d) {
     if(e->jumps_left > 0) {
         e->jumps_left--;
         e->on_floor = false;
         
         e->AddBehaviour(IGNORE_GRAVITY); 
-        e->dash_timer = 0.1f; 
+        e->dash_timer = d->player_dash_time;
 
         float mouse_x = d->input.mouse_x;
         float mouse_y = d->input.mouse_y;
@@ -92,7 +145,10 @@ void Initialize(GameData* data, SDL_Window* window, SDL_Renderer* renderer) {
     
     data->gravity = 95.0f;
     data->player_jump_power = -25.0;
-    data->player_dash_power = 50.0f; 
+    // Halva farten mot tidigare (50 i 0.1 s), men längre tid,
+    // så dashen blir ca 4 rutor lång i stället för 5 och syns bättre.
+    data->player_dash_power = 25.0f;
+    data->player_dash_time = 0.16f;
     data->wall_friction = 0.45f;
 
     printf("Creating Level\n");
@@ -107,6 +163,8 @@ void Initialize(GameData* data, SDL_Window* window, SDL_Renderer* renderer) {
     player->jumps_left = 2;    
     player->current_frame = 0;
     player->anim_timer = 0.0f;
+
+    CANNON_ROOM::Setup(data, player->x, player->y);
 }
 
 bool HandleEvents(GameData *data, SDL_Event event){
@@ -128,6 +186,7 @@ void Update(GameData* data, float dt){
     }
 
     LevelData* level = data->GetCurrentLevel();
+    Entity* player = nullptr;
 
     for (int i = 0; i < level->entityCount; i++) {
         Entity* e = &level->entityBuffer[i];
@@ -158,9 +217,10 @@ void Update(GameData* data, float dt){
             
             float check_x = e->x + (e->vx > 0 ? 0.8f : 0.2f);
             if (IsWall(level, check_x, e->y + 0.5f)) {
-                e->x -= e->vx * dt; 
-                e->vx = 0; 
-                touching_wall = true; 
+                e->x -= e->vx * dt;
+                e->wall_on_right = e->vx > 0; // måste läsas innan vx nollas
+                e->vx = 0;
+                touching_wall = true;
 
                 if (e->vy > 0) {
                     e->vy *= std::pow(data->wall_friction, dt * 60.0f); 
@@ -201,20 +261,13 @@ void Update(GameData* data, float dt){
 
         // --- ANIMERING ---
         if (e->id == ID::PLAYER) {
-            bool is_moving = std::abs(e->vx) > 0.5f;
-
-            if (is_moving && e->on_floor) {
-                const float FRAME_TIME = 0.1f; // Sekunder per bildruta (0.1f = 10 FPS)
-                e->anim_timer += dt;
-                if (e->anim_timer >= FRAME_TIME) {
-                    e->anim_timer -= FRAME_TIME;
-                    e->current_frame++;
-                }
-            } else {
-                e->current_frame = 0;
-                e->anim_timer = 0.0f;
-            }
+            UpdatePlayerAnimation(e, touching_wall, dt);
+            player = e;
         }
+    }
+
+    if (!data->edit_level) {
+        CANNON_ROOM::Update(data, player, dt);
     }
 }
 
@@ -224,7 +277,9 @@ void Draw(GameData* data, SDL_Renderer* renderer){
     SDL_RenderClear(renderer);
 
     RenderLevel(data, renderer);
+    CANNON_ROOM::Draw(data, renderer);
     RenderEntities(data, renderer);
+    CANNON_ROOM::DrawOverlay(data, renderer);
 
     DEV::Draw(data, renderer);
     SDL_RenderPresent(renderer);

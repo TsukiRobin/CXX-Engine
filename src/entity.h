@@ -18,6 +18,15 @@ enum class ID : uint8_t {
   WALL = 5,
 };
 
+// Vilken animation spelaren visar just nu. Väljs varje frame i Update().
+enum class PlayerAnim : uint8_t {
+  Idle = 0,
+  Run,
+  Jump,
+  WallGlide,
+  Dash,
+};
+
 struct Position{
   int x;
   int y;
@@ -37,6 +46,8 @@ struct Entity {
 
   int current_frame = 0;
   float anim_timer = 0.0f;
+  PlayerAnim anim = PlayerAnim::Idle;
+  bool wall_on_right = false; // vilken sida väggen var på vid senaste väggkontakt
 
 
   bool HasBehaviour(Behaviour flags){

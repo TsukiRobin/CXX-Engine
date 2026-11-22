@@ -1,0 +1,10 @@
+{
+  "source": { "asset_id": "770f6734-a056-4906-9e97-dfbe44a153ba", "label": "DodgeMan player (frame 0 of player.png)" },
+  "assets": [
+    { "file": "assets/sprites/player_idle.png", "asset_id": "27359cab-183b-4095-8f6e-fd16b9ea5bbc", "sha12": "e058b6f0c91d", "label": "player idle, 6 frames 36x36" },
+    { "file": "assets/sprites/player_run.png",  "asset_id": "e455d651-3708-4802-8e99-c4536ed15660", "sha12": "c19ebd85dc98", "label": "player run, 8 frames 36x36" },
+    { "file": "assets/sprites/player_jump.png", "asset_id": "4e748464-8951-4d7f-b4ce-cd60d3567c34", "sha12": "7f10d86643ee", "label": "player jump, 8 frames 36x36, frames bottom-aligned locally" },
+    { "file": "assets/sprites/wall.png", "asset_id": "61b4b27b-f918-4082-9921-4524f3cdbeae", "sha12": "70f6db4a4ca2", "label": "stone brick wall texture, downscaled 256->64, split into 2x2 strip of 32px frames" },
+    { "file": "assets/sprites/cannon.png", "asset_id": "96cdaeb7-ff7c-498e-9481-e37c978c2522", "sha12": "d06c88c2a917", "label": "wall cannon, muzzle right" }
+  ]
+}

@@ -19,7 +19,14 @@ enum class SPRITE_ID{
   Player,
   Medusa,
   Golem,
-  Ghost
+  Ghost,
+  PlayerIdle,
+  PlayerRun,
+  PlayerJump,
+  PlayerWallGlide,
+  Cannon,
+  Cannonball,
+  Gem,
 };
 
 
@@ -30,6 +37,8 @@ struct SpriteDataEntry{
   
 };
 Sprite* GetSpriteFromID(ID id, Sprite* spriteBuffer);
+// Som GetSpriteFromID, men tar hänsyn till entitetens animationstillstånd.
+Sprite* GetEntitySprite(const Entity* entity, Sprite* spriteBuffer);
 
 namespace AssetManagement{
 
